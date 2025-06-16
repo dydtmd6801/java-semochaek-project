@@ -17,14 +17,17 @@ public class BookFetcherScheduler implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		for (char c = '가'; c <= '힣'; c += 100) {
 			naverBookService.fetchAndSaveBooks(String.valueOf(c));
+			Thread.sleep(500); // 0.5초 쉬기
 		}
 		
 		for (char c = '0'; c <= '9'; c++) {
 			naverBookService.fetchAndSaveBooks(String.valueOf(c));
+			Thread.sleep(500); // 0.5초 쉬기
 		}
 		
 		for (char c = 'A'; c <= 'Z'; c++) {
 			naverBookService.fetchAndSaveBooks(String.valueOf(c));
+			Thread.sleep(500); // 0.5초 쉬기
 		}
 	}
 }

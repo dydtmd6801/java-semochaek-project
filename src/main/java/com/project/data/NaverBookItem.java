@@ -8,7 +8,7 @@ public class NaverBookItem {
 	private String author;
 	private String publisher;
 	private String isbn;
-	private String iamge;
+	private String image;
 	private String description;
 	private int price;
 }

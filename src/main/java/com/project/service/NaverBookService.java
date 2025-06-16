@@ -48,7 +48,8 @@ public class NaverBookService {
                     .map(this::toBookEntity)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
-
+            
+            System.out.println("책 수: " + books.size());
             bookRepository.saveAll(books);
         }
 	}
@@ -59,12 +60,20 @@ public class NaverBookService {
 			return null;
 		}
 		
+		System.out.println("📘 저장 시도: " + item.getTitle());
+		System.out.println("📕 ISBN: " + item.getIsbn());
+		System.out.println("📗 중복 여부: " + bookRepository.findByIsbn(isbn13).isPresent());
+		
+		if (item.getImage() == null || item.getImage().isEmpty()) {
+			return null;
+		}
+		
 		return Book.builder()
 				.title(item.getTitle())
 				.author(item.getAuthor())
 				.publisher(item.getPublisher())
 				.isbn(isbn13)
-				.image(item.getIamge())
+				.image(item.getImage())
 				.description(item.getDescription())
 				.price(item.getPrice())
 				.build();
@@ -73,6 +82,7 @@ public class NaverBookService {
 	private String extractIsbn13(String rawIsbn) {
 		if (rawIsbn == null) return null;
 		String[] parts = rawIsbn.split(" ");
+//		System.out.println("isbn: " + rawIsbn + " → " + extractIsbn13(rawIsbn));
 		return parts.length == 2 ? parts[1] : rawIsbn;
 	}
 }
