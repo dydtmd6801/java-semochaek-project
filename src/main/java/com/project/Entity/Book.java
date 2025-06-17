@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +39,8 @@ public class Book {
 	@Column(nullable = false)
 	private String image;
 	
-	@Column(nullable = false, length = 1000)
+	@Lob
+	@Column(nullable = false, columnDefinition = "TEXT")
 	private String description;
 	
 	@Column(nullable = false)

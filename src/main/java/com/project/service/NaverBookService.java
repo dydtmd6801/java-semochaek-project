@@ -56,13 +56,9 @@ public class NaverBookService {
 	
 	private Book toBookEntity(NaverBookItem item) {
 		String isbn13 = extractIsbn13(item.getIsbn());
-		if (isbn13 == null || bookRepository.findByIsbn(isbn13).isPresent()) {
+		if (isbn13 == null || isbn13.isEmpty() || bookRepository.findByIsbn(isbn13).isPresent()) {
 			return null;
 		}
-		
-		System.out.println("📘 저장 시도: " + item.getTitle());
-		System.out.println("📕 ISBN: " + item.getIsbn());
-		System.out.println("📗 중복 여부: " + bookRepository.findByIsbn(isbn13).isPresent());
 		
 		if (item.getImage() == null || item.getImage().isEmpty()) {
 			return null;
@@ -75,7 +71,7 @@ public class NaverBookService {
 				.isbn(isbn13)
 				.image(item.getImage())
 				.description(item.getDescription())
-				.price(item.getPrice())
+				.price(item.getDiscount())
 				.build();
 	}
 

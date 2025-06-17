@@ -10,5 +10,5 @@ public class NaverBookItem {
 	private String isbn;
 	private String image;
 	private String description;
-	private int price;
+	private int discount;
 }
