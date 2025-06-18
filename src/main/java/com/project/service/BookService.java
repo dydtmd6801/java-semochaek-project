@@ -1,11 +1,13 @@
 package com.project.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.project.data.BookDTO;
+import com.project.data.BookDetailDTO;
 import com.project.entity.Book;
 import com.project.repository.BookRepository;
 
@@ -31,5 +33,25 @@ public class BookService {
 						.build())
 				.collect(Collectors.toList());
 	}
+	
+	public BookDetailDTO getBookDetail(String isbn) {
+		Optional<Book> book = bookRepository.findByIsbn(isbn);
+		
+		if (book.isPresent()) {
+			return BookDetailDTO.builder()
+					.title(book.get().getTitle())
+					.author(book.get().getAuthor())
+					.publisher(book.get().getPublisher())
+					.price(book.get().getPrice())
+					.image(book.get().getImage())
+					.description(book.get().getDescription())
+					.isbn(book.get().getIsbn())
+					.build();
+		} else {
+			return null;
+		}
+		
+	}
+
 }
 
