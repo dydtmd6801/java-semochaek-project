@@ -6,12 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 	
@@ -45,6 +45,6 @@ public class User {
 	private String detailAddress;
 	
 	@Column(nullable = true)
-	private int postNumber;
+	private Integer postNumber;
 	
 }
