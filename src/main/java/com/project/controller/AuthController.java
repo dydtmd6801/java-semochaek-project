@@ -31,10 +31,10 @@ public class AuthController {
 	public ResponseEntity<?> login(@RequestBody AuthRequest request) {
 		try {		
 			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+					new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
 			);
 			
-			String token = jwtUtil.generateToken(request.getUsername());
+			String token = jwtUtil.generateToken(request.getEmail());
 			return ResponseEntity.ok(Collections.singletonMap("token", token));
 		} catch (BadCredentialsException e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 비밀번호 오류");
