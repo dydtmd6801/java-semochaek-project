@@ -1,5 +1,15 @@
 package com.project.data;
 
-public class RegisterRequest {
+import lombok.Getter;
 
+@Getter
+public class RegisterRequest {
+	private String email;
+	private String password;
+	private String name;
+	private String phoneNumber;
+	private String status;
+	private String address;
+	private String detailAddress;
+	private Integer postNumber;
 }
