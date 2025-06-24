@@ -9,6 +9,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,11 @@ public class AuthController {
 					new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
 			);
 			
-			String token = jwtUtil.generateToken(request.getEmail());
+			org.springframework.security.core.userdetails.User userDetails = (User) authentication.getPrincipal();
+			
+			String role = userDetails.getAuthorities().iterator().next().getAuthority();
+			
+			String token = jwtUtil.generateToken(request.getEmail(), role);
 			return ResponseEntity.ok(Collections.singletonMap("token", token));
 		} catch (BadCredentialsException e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 비밀번호 오류");
