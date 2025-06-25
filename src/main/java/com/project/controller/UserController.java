@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.data.ApproveRequest;
+import com.project.data.FindEmailRequest;
 import com.project.data.RegisterRequest;
 import com.project.service.UserService;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -31,6 +33,16 @@ public class UserController {
 	public ResponseEntity<?> approve(@RequestBody ApproveRequest request) {
 		userService.updateStatus(request.getEmail());
 		return ResponseEntity.ok("승인 완료");
+	}
+	
+	@PostMapping("/findEmail")
+	public ResponseEntity<?> findEmail(@RequestBody FindEmailRequest request) {
+		try {
+			String email = userService.loadEmail(request.getName(), request.getPhoneNumber());
+			return ResponseEntity.ok(email);
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 	
 }
