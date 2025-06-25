@@ -7,6 +7,8 @@ import com.project.data.RegisterRequest;
 import com.project.entity.User;
 import com.project.repository.UserRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,5 +36,19 @@ public class UserService {
 				.build();
 				
 		userRepository.save(user);
+	}
+	
+	@Transactional
+	public void updateStatus(String email) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("해당 이메일이 존재하지 않습니다."));
+		
+		user.setStatus("Y");
+	}
+	
+	public String loadStatus(String email) {
+		return userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("해앋 이메일이 존재하지 않습니다."))
+				.getStatus();
 	}
 }

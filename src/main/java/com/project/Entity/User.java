@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -39,6 +40,7 @@ public class User {
 	@Column(nullable = false)
 	private String role;
 	
+	@Setter
 	@Column(nullable = false, length = 1)
 	private String status;
 	
