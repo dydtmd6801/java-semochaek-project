@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.data.AuthRequest;
+import com.project.service.UserService;
 import com.project.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -27,10 +28,16 @@ public class AuthController {
 	
 	private final AuthenticationManager authenticationManager;
 	private final JwtUtil jwtUtil;
+	private final UserService userService;
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody AuthRequest request) {
 		try {		
+			
+			if (userService.loadStatus(request.getEmail()).equals("N")) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("승인되지 않은 아이디");
+			}
+			
 			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
 			);
