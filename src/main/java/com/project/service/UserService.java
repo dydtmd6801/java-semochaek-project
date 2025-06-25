@@ -51,4 +51,10 @@ public class UserService {
 				.orElseThrow(() -> new EntityNotFoundException("해앋 이메일이 존재하지 않습니다."))
 				.getStatus();
 	}
+	
+	public String loadEmail(String name, String telephone) {
+		return userRepository.findByNameAndTelephone(telephone, telephone)
+				.orElseThrow(() -> new EntityNotFoundException("존재하는 사용자가 아닙니다."))
+				.getEmail();		
+	}
 }
