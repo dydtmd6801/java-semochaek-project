@@ -57,4 +57,12 @@ public class UserService {
 				.orElseThrow(() -> new EntityNotFoundException("존재하는 사용자가 아닙니다."))
 				.getEmail();		
 	}
+	
+	@Transactional
+	public void updatePassword(String email, String password) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
+		
+		user.setPassword(passwordEncoder.encode(password));
+	}
 }
