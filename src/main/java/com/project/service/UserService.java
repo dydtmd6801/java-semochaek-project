@@ -53,7 +53,7 @@ public class UserService {
 	}
 	
 	public String loadEmail(String name, String telephone) {
-		return userRepository.findByNameAndTelephone(telephone, telephone)
+		return userRepository.findByNameAndTelephone(name, telephone)
 				.orElseThrow(() -> new EntityNotFoundException("존재하는 사용자가 아닙니다."))
 				.getEmail();		
 	}
