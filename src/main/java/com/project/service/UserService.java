@@ -65,4 +65,9 @@ public class UserService {
 		
 		user.setPassword(passwordEncoder.encode(password));
 	}
+	
+	public User loadUser(String email) {
+		return userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
+	}
 }
