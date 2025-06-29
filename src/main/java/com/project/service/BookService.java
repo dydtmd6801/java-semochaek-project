@@ -11,6 +11,7 @@ import com.project.data.BookDetailDTO;
 import com.project.entity.Book;
 import com.project.repository.BookRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -50,8 +51,11 @@ public class BookService {
 		} else {
 			return null;
 		}
-		
 	}
-
+	
+	public Book loadBook(String isbn) {
+		return bookRepository.findByIsbn(isbn)
+				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 책입니다."));
+	}
 }
 
