@@ -12,6 +12,7 @@ import com.project.entity.Cart;
 import com.project.entity.User;
 import com.project.repository.CartRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -45,5 +46,13 @@ public class CartService {
 						.image(cart.getBook().getImage())
 						.build())
 				.collect(Collectors.toList());
+	}
+	
+	@Transactional
+	public void removeCart(String email, String isbn) {
+		User user = userService.loadUser(email);
+		Book book = bookService.loadBook(isbn);
+		
+		cartRepository.deleteByUserAndBook(user, book);
 	}
 }
