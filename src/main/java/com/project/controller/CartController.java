@@ -38,4 +38,11 @@ public class CartController {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		return cartService.loadCartList(email);
 	}
+	
+	@GetMapping("/deleteCart")
+	public ResponseEntity<?> deleteCart(@RequestBody CartRequest request) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		cartService.removeCart(email, request.getIsbn());
+		return ResponseEntity.ok("삭제 완료");
+	}
 }
