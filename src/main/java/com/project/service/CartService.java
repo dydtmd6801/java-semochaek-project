@@ -1,8 +1,12 @@
 package com.project.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.project.data.CartRequest;
+import com.project.data.CartResponseDTO;
 import com.project.entity.Book;
 import com.project.entity.Cart;
 import com.project.entity.User;
@@ -28,5 +32,18 @@ public class CartService {
 				.build();
 		
 		cartRepository.save(cart);
+	}
+	
+	public List<CartResponseDTO> loadCartList(String email) {
+		User user = userService.loadUser(email);
+		List<Cart> carts = cartRepository.findAllByUser(user);
+		
+		return carts.stream()
+				.map(cart -> CartResponseDTO.builder()
+						.title(cart.getBook().getTitle())
+						.isbn(cart.getBook().getIsbn())
+						.image(cart.getBook().getImage())
+						.build())
+				.collect(Collectors.toList());
 	}
 }
