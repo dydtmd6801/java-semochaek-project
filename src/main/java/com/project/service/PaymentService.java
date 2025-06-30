@@ -48,7 +48,7 @@ public class PaymentService {
 	@Value("${iamport.secret}")
 	private String IMP_SECRET;
 	
-	public void verifyAndSave(PaymentVerifyRequest request) {
+	public void verifyAndSave(PaymentVerifyRequest request, String email) {
 		String token = getAccessToken();
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -78,12 +78,15 @@ public class PaymentService {
 			throw new RuntimeException("결제 금액 불일치: PG = " + amount + ", 클라이언트 = " + total);
 		}
 		
+		User user = userRepository.findByEmail(email).orElseThrow();
+		
 		Order order = Order.builder()
 				.merchantId(request.getMerchantUid())
 				.impUid(request.getImpUid())
 				.amount(amount)
 				.status(status)
 				.paidAt(paidAt)
+				.user(user)
 				.build();
 		
 		orderRepository.save(order);
