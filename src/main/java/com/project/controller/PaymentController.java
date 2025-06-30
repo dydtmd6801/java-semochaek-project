@@ -1,0 +1,26 @@
+package com.project.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.project.data.PaymentVerifyRequest;
+import com.project.service.PaymentService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/payments")
+@RequiredArgsConstructor
+public class PaymentController {
+	
+	private final PaymentService paymentService;
+	
+	@PostMapping("/verify")
+	public ResponseEntity<String> verify(@RequestBody PaymentVerifyRequest request) {
+		paymentService.verifyAndSave(request);
+		return ResponseEntity.ok("결제 검증 및 저장 완료");
+	}
+}
