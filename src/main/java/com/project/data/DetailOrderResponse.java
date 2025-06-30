@@ -8,6 +8,6 @@ import lombok.Data;
 public class DetailOrderResponse {
 	private String bookIsbn;
 	private String title;
-	private String quantity;
-	private String price;
+	private int quantity;
+	private int price;
 }
