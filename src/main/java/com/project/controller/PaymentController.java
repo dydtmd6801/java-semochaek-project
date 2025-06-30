@@ -25,7 +25,8 @@ public class PaymentController {
 	
 	@PostMapping("/verify")
 	public ResponseEntity<String> verify(@RequestBody PaymentVerifyRequest request) {
-		paymentService.verifyAndSave(request);
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		paymentService.verifyAndSave(request, email);
 		return ResponseEntity.ok("결제 검증 및 저장 완료");
 	}
 	
