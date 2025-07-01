@@ -1,9 +1,9 @@
 package com.project.service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.data.BookDTO;
@@ -20,19 +20,17 @@ public class BookService {
 	
 	private final BookRepository bookRepository;
 	
-	public List<BookDTO> getAllBooks() {
-		List<Book> books = bookRepository.findAll();
+	public Page<BookDTO> getAllBooks(Pageable pageable) {
+		Page<Book> books = bookRepository.findAll(pageable);
 		
-		return books.stream()
-				.map((Book book) -> BookDTO.builder()
+		return books.map((Book book) -> BookDTO.builder()
 						.title(book.getTitle())
 						.author(book.getAuthor())
 						.publisher(book.getPublisher())
 						.isbn(book.getIsbn())
 						.image(book.getImage())
 						.price(book.getPrice())
-						.build())
-				.collect(Collectors.toList());
+						.build());
 	}
 	
 	public BookDetailDTO getBookDetail(String isbn) {
