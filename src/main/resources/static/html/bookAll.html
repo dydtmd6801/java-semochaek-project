@@ -47,10 +47,11 @@
         try {
             const response = await axios.get("http://localhost:8080/books");
 
-            response.data.forEach(book => {
-                const li = document.createElement("div");
-                li.innerHTML = `<string>${book.title}</string>`;
-                bookList.appendChild(li);
+            const books = response.data._embedded?.bookDTOList || [];
+            books.forEach(book => {
+                const div = document.createElement("div")
+                div.innerHTML = `<strong>${book.title}</strong> - ${book.author}`
+                bookList.appendChild(div);
             })
         } catch (err) {
             bookList.innerHTML = err;
