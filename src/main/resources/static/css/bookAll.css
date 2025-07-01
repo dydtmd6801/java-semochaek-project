@@ -1,0 +1,32 @@
+header {
+    margin-bottom: 2vh;
+}
+header .spacer {
+    text-align: right;
+}
+section {
+    background-color: blue;
+}
+section .bookMenu {
+    width: 100%;
+    height: 6vh;
+}
+section .bookMenu ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+    line-height: 100%;
+}
+section .bookMenu ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px 50px 0 0;
+}
+section .books .book {
+    width: 100%;
+    height: 200px;
+}
+footer {
+    height: 20vh;
+}
