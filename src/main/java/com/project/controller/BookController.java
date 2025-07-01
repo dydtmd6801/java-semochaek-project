@@ -1,7 +1,12 @@
 package com.project.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +28,18 @@ public class BookController {
 	private final BookService bookService;
 	
 	@GetMapping
-	public List<BookDTO> getBooks() {
-		return bookService.getAllBooks();
+	public PagedModel<EntityModel<BookDTO>> getBooks(
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "size", defaultValue = "20") int size,
+			@RequestParam(name = "sortBy", defaultValue = "title") String sortBy,
+			@RequestParam(name = "direction", defaultValue = "asc") String direction,
+			PagedResourcesAssembler<BookDTO> assembler
+			) {
+		
+		Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.fromString(direction), sortBy));
+		Page<BookDTO> books = bookService.getAllBooks(pageable);
+		
+		return assembler.toModel(books);
 	}
 	
 	@GetMapping("/detail")
