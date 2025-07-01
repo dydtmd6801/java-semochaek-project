@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,9 +14,10 @@ import com.project.service.BookService;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/books")
 public class BookController {
 	
 	private final BookService bookService;
