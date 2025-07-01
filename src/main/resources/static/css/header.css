@@ -1,3 +1,12 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+.container {
+    height: 100vh;
+    width: 1280px;
+    max-width: 1280px;
+}
 header {
     background-color: red;
     grid-column: 1 / 5;
