@@ -68,6 +68,9 @@
                 const title = document.createElement("p");
                 title.className = "book-title";
                 title.textContent = book.title;
+                title.addEventListener("click", async() => {
+                    location.href = `bookDetail.html?isbn=${book.isbn}`
+                })
 
                 const subInfo = document.createElement("p");
                 subInfo.className = "book-sub-info";
