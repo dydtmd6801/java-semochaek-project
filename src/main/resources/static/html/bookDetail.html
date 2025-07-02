@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/init.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/bookDetail.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title"><a href="index.html" class="gugi-regular">세모책</a></div>
+            <div class="topMenu">
+                <ul>
+                    <li><a href="bookAll.html">전체도서</a></li>
+                    <li><a href="#">국내도서</a></li>
+                    <li><a href="#">외국도서</a></li>
+                </ul>
+            </div>
+            <div class="spacer">사용자 이모지</div>
+        </header>
+        <section>
+            <div>
+            <div class="title-wrapper">
+                <p class="book-title"></p>
+            </div>
+            <div class="top">
+                <div class="image-wrapper"><img class="book-image" src=""></div>
+                <div class="book-price-n-btns">
+                    <div class="price-wrapper"><p class="book-price"></p></div>
+                    <div class="btns-container">
+                        <div>
+                            <a>찜하기</a>
+                            <a>장바구니</a>
+                            <a>바로구매</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="bottom">
+                <div>
+                    <p class="medium-title">책 소개</p>
+                    <div>
+                        <div class="small-title">제목</div><div class="info-content"></div>
+                    </div>
+                    <div>
+                        <div class="small-title">저자</div><div class="info-content"></div>
+                    </div>
+                    <div>
+                        <div class="small-title">출판사</div><div class="info-content"></div>
+                    </div>
+                    <div>
+                        <div class="small-title">설명</div><div class="info-content"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <footer>푸터</footer>
+    </div>
+</body>
+<script>
+    const bookTitle = document.getElementsByClassName("book-title")[0];
+    const bookImage = document.getElementsByClassName("book-image")[0];
+    const bookPrice = document.getElementsByClassName("book-price")[0];
+    const infoTitle = document.getElementsByClassName("info-content")[0];
+    const infoAuthor = document.getElementsByClassName("info-content")[1];
+    const infopublisher = document.getElementsByClassName("info-content")[2];
+    const infoDescription = document.getElementsByClassName("info-content")[3];
+
+    const params = new URLSearchParams(window.location.search)
+    const isbn = params.get("isbn");
+
+    document.addEventListener("DOMContentLoaded", async() => {
+        try {
+            const response = await axios.get(`http://localhost:8080/books/detail?isbn=${isbn}`);
+            const info = response.data;
+
+            bookTitle.textContent = info.title;
+
+            bookImage.src = info.image;
+
+            bookPrice.textContent = info.price == 0
+            ? "판매종료"
+            : `${info.price}원`;
+
+            infoTitle.textContent = info.title;
+            infoAuthor.textContent = info.author;
+            infopublisher.textContent = info.publisher;
+            infoDescription.textContent = info.description;
+
+        } catch (err) {
+            console.log(err);
+        }
+    })
+</script>
+</html>
