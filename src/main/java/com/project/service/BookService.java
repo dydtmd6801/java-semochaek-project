@@ -21,7 +21,7 @@ public class BookService {
 	private final BookRepository bookRepository;
 	
 	public Page<BookDTO> getAllBooks(Pageable pageable) {
-		Page<Book> books = bookRepository.findAll(pageable);
+		Page<Book> books = bookRepository.findAllByPriceNot(0, pageable);
 		
 		return books.map((Book book) -> BookDTO.builder()
 						.title(book.getTitle())
