@@ -4,16 +4,15 @@ header {
 header .spacer {
     text-align: right;
 }
-section {
-    background-color: blue;
-}
 section .bookMenu {
     width: 100%;
     height: 6vh;
+    display: flex;
+    justify-content: center;
 }
 section .bookMenu ul {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 341.3px);
     height: 100%;
     line-height: 100%;
 }
@@ -23,10 +22,85 @@ section .bookMenu ul li {
     align-items: center;
     border-radius: 50px 50px 0 0;
 }
-section .books .book {
-    width: 100%;
-    height: 200px;
+section #books {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 footer {
     height: 20vh;
+}
+
+
+.book {
+    height: 250px;
+    display: grid;
+    grid-template-columns: 170px 684px 170px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.book:first-child {
+    border-top: 1px solid lightgrey;
+}
+
+.book:last-child {
+    border-top: 1px solid lightgrey;
+}
+
+.book-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-cover {
+     width: 120px;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.book-title {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.book-sub-info {
+    font-size: 0.9em;
+    color: grey;
+    margin-bottom: 15px;
+}
+
+.book-price {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.book-btns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.btn-favorite, .btn-cart, .btn-buy {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 0.9em;
+}
+.btn-favorite {
+    background-color: #fe3e3e;
+    color: white;
+    border: none;
 }
