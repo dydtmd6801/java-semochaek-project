@@ -25,7 +25,7 @@
     align-items: center;
     margin-top: 40px;
 }
-.login-form input:not(:nth-child(3)) {
+#email, #password {
     height: 50px;
     width: 400px;
     font-size: 16px;
@@ -34,7 +34,12 @@
     margin: 1px;
     padding-left: 10px;
 }
-.login-form input:nth-child(3) {
+.error {
+    font-size: 0.9em;
+    margin: 14px 0 5px 0;
+    color: darkred;
+}
+#btn-login {
     height: 50px;
     width: 414px;
     border: none;
