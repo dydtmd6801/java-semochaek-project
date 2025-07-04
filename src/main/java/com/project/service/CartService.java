@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.project.data.CartRequest;
 import com.project.data.CartResponseDTO;
 import com.project.entity.Book;
 import com.project.entity.Cart;
@@ -23,9 +22,9 @@ public class CartService {
 	private final UserService userService;
 	private final BookService bookService;
 	
-	public void saveCart(String email, CartRequest request) {
+	public void saveCart(String email, String isbn) {
 		User user = userService.loadUser(email);
-		Book book = bookService.loadBook(request.getIsbn());
+		Book book = bookService.loadBook(isbn);
 		
 		Cart cart = Cart.builder()
 				.user(user)
