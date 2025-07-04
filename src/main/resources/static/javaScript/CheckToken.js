@@ -1,4 +1,5 @@
 import parser from "./token-parse.js";
+import validator from "./ValidateToken.js"
 
 const loginWrapper = document.getElementsByClassName("login")[0];
 
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnLogin.textContent = "세모책 로그인";
         loginWrapper.appendChild(btnLogin);
     } else {
+        validator.validateToken(token);
         const parseToken = parser.parseJwt(token);
         const userInfo = document.createElement("p");
         userInfo.textContent = `${parseToken.sub} 님 환영합니다`;
