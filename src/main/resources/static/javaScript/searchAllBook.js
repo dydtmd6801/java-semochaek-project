@@ -1,3 +1,5 @@
+import cart from "./Cart.js";
+
 document.addEventListener("DOMContentLoaded", async() => {
     const bookList = document.getElementById("books");
 
@@ -56,6 +58,9 @@ document.addEventListener("DOMContentLoaded", async() => {
             const btnCart = document.createElement("a");
             btnCart.className = "btn-cart";
             btnCart.textContent = "장바구니";
+            btnCart.addEventListener("click", () => {
+                cart.addCart(book.isbn);
+            })
 
             const btnBuy = document.createElement("a");
             btnBuy.className = "btn-buy";
