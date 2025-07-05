@@ -1,0 +1,116 @@
+.cart-title-wrapper {
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.0em;
+    font-weight: 500;
+}
+
+.cart-books-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.cart-book {
+    padding: 15px;
+    width: 80%;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #d9d9d9;
+}
+.check-box {
+    width: 20px;
+    height: 20px;
+}
+.cart-book-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 200px
+}
+.cart-book-info > div {
+    display: flex;
+    flex-direction: column;
+}
+.cart-book-title, .cart-book-price {
+    font-size: 1.0em;
+    margin: 8px 0 8px 20px;
+}
+.cart-book-price {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+.cart-book-image {
+    width: 80px;
+}
+.cart-book-quantity-by-price-container {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-book-quantity-by-price {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.cart-book-quantity-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.cart-book-quantity-container > button {
+    border: none;
+    width: 25px;
+    height: 25px;
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+    padding: 0px;
+    line-height: 25px;
+}
+.cart-book-quantity {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.btn-cart-book-delete {
+    border: none;
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    font-size: 1.5em;
+    background-color: white;
+    cursor: pointer;
+}
+
+.cart-book-total-price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.cart-book-total-price {
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.btn-cart-book-pay {
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    background-color: navy;
+    color: white;
+    font-size: 1.0em;
+    cursor: pointer;
+}
