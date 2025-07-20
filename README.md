@@ -10,7 +10,7 @@
 - 버전 관리 : Git & GitHub</li>
 ## 🗂️ 주요 기능
 1. [👤 회원가입 및 로그인](https://github.com/dydtmd6801/java-semochaek-project?tab=readme-ov-file#-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8)
-2. [🪪 Spring Security + JWT 기반 인증](https://github.com/dydtmd6801/java-semochaek-project?tab=readme-ov-file#-spring-security-jwt-%EA%B8%B0%EB%B0%98-%EC%9D%B8%EC%A6%9D)
+2. [🪪 Spring Security + JWT 기반 인증](https://github.com/dydtmd6801/java-semochaek-project?tab=readme-ov-file#-spring-security--jwt-%EA%B8%B0%EB%B0%98-%EC%9D%B8%EC%A6%9D)
 3. [🛒 찜하기 및 장바구니](https://github.com/dydtmd6801/java-semochaek-project?tab=readme-ov-file#-%EC%B0%9C%ED%95%98%EA%B8%B0-%EB%B0%8F-%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88)
 4. [💳 결제 시스템](https://github.com/dydtmd6801/java-semochaek-project?tab=readme-ov-file#-%EA%B2%B0%EC%A0%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C)
 ### 👤 회원가입 및 로그인
