@@ -123,8 +123,10 @@ async function loadCartList() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", async() => {
-    loadCartList();
-})
+function loadList() {
+    document.addEventListener("DOMContentLoaded", async() => {
+        loadCartList();
+    })
+}
 
-export default {addCart};
+export default {addCart, loadList};
