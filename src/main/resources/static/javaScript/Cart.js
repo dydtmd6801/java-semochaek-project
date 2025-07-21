@@ -25,4 +25,106 @@ function addCart(isbn) {
     .catch(() => alert("에러가 발생하였습니다. 관리자에게 문의 부탁드립니다."));
 }
 
+async function loadCartList() {
+    const cartBooksContainer = document.getElementsByClassName("cart-books-container")[0];
+    console.log(cartBooksContainer);
+    const token = localStorage.getItem("token");
+
+    if (token == null) {
+        alert("로그인이 필요합니다.")
+        location.href = "login.html";
+        return;
+    }
+
+    if (validator.validateToken(token)) {
+        alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
+        location.href = "login.html";
+        return;
+    }
+
+    const cartBooks = await axios.get("http://localhost:8080/searchCart", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    })
+
+    cartBooks.data.forEach(book => {
+        const cartBook = document.createElement("div");
+        cartBook.className = "cart-book";
+
+        // 체크박스
+        const checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.className = "check-box";
+
+        // 도서 정보
+        const cartBookInfo = document.createElement("div");
+        cartBookInfo.className = "cart-book-info";
+        
+        // 도서 정보 - 이미지
+        const cartBookImage = document.createElement("img");
+        cartBookImage.src = `${book.image}`;
+        cartBookImage.className = "cart-book-image";
+        cartBookInfo.appendChild(cartBookImage);
+        
+        // 도서정보 - 제목, 가격
+        const cartBookInfoDiv = document.createElement("div");
+        const cartBookTitle = document.createElement("p");
+        cartBookTitle.className = "cart-book-title";
+        cartBookTitle.textContent = `${book.title}`;
+        const cartBookPrice = document.createElement("p");
+        cartBookPrice.className = "cart-book-price";
+        cartBookPrice.textContent = `${book.price}`;
+        cartBookInfoDiv.appendChild(cartBookTitle);
+        cartBookInfoDiv.appendChild(cartBookPrice);
+        cartBookInfo.appendChild(cartBookInfoDiv);
+
+        // 개수에 따른 가격
+        const cartBookQuantityByPriceContainer = document.createElement("div");
+        cartBookQuantityByPriceContainer.className = "cart-book-quantity-by-price-container";
+
+        // 개수에 따른 가격 - 개수 곱 가격
+        const cartBookQuantityByPrice = document.createElement("p");
+        cartBookQuantityByPrice.className = "cart-book-quantity-by-price";
+        cartBookQuantityByPrice.textContent = ""
+        cartBookQuantityByPriceContainer.appendChild(cartBookQuantityByPrice);
+
+        // 개수에 따른 가격 - 개수 카운팅
+        const cartBookQuantityContainer = document.createElement("div");
+        cartBookQuantityContainer.className = "cart-book-quantity-container";
+        const btnCartBookQuantityMinus = document.createElement("button");
+        btnCartBookQuantityMinus.className = "btn-cart-book-quantity-minus";
+        btnCartBookQuantityMinus.textContent = "-"
+        const btnCartBookQuantityPlus = document.createElement("button");
+        btnCartBookQuantityPlus.className = "btn-cart-book-quantity-plus";
+        btnCartBookQuantityPlus.textContent = "+";
+        const cartBookQuantity = document.createElement("div")
+        cartBookQuantity.className = "cart-book-quantity";
+        cartBookQuantity.textContent = "0";
+        cartBookQuantityContainer.appendChild(btnCartBookQuantityMinus);
+        cartBookQuantityContainer.appendChild(cartBookQuantity);
+        cartBookQuantityContainer.appendChild(btnCartBookQuantityPlus);
+
+        cartBookQuantityByPriceContainer.appendChild(cartBookQuantityContainer);
+
+        //삭제 버튼
+        const btnCartBookDelete = document.createElement("button")
+        btnCartBookDelete.className = "btn-cart-book-delete"
+        btnCartBookDelete.textContent = "ｘ";
+
+        cartBook.appendChild(checkBox);
+        cartBook.appendChild(cartBookInfo);
+        cartBook.appendChild(cartBookQuantityByPriceContainer);
+        cartBook.appendChild(btnCartBookDelete);
+
+
+        cartBooksContainer.appendChild(cartBook);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", async() => {
+    loadCartList();
+})
+
 export default {addCart};
