@@ -36,7 +36,7 @@ public class CartController {
 		}
 	}
 	
-	@PostMapping("/searchCart")
+	@GetMapping("/searchCart")
 	public List<CartResponseDTO> searchCart() {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		return cartService.loadCartList(email);
