@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", async() => {
     try {
         const response = await axios.get("http://localhost:8080/books");
 
-        const books = response.data._embedded?.bookDTOList || [];
+        // const books = response.data._embedded?.bookDTOList || [];
+        const books = response.data.content;
         books.forEach(book => {
             const div = document.createElement("div");
             div.className = "book";
