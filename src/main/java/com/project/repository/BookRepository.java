@@ -10,5 +10,5 @@ import com.project.entity.Book;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 	Optional<Book> findByIsbn(String isbn);
-	Page<Book> findAllByPriceNot(int price, Pageable pageable);
+//	Page<Book> findAllByPriceNot(int price, Pageable pageable);
 }

@@ -30,27 +30,27 @@ public class BookController {
 	
 	private final BookService bookService;
 	
-	@GetMapping
-	public PagedModel<EntityModel<BookDTO>> getBooksPage (
-			@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "size", defaultValue = "20") int size,
-			@RequestParam(name = "sortBy", defaultValue = "title") String sortBy,
-			@RequestParam(name = "direction", defaultValue = "asc") String direction,
-			PagedResourcesAssembler<BookDTO> assembler
-			) {
-		Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.fromString(direction), sortBy));
-		
-		long start = System.currentTimeMillis();
-		
-		Page<BookDTO> books = bookService.getAllBooksPage(pageable);
-		
-		long end = System.currentTimeMillis();
-		System.out.println("[Page] 소요 시간 : " + (end - start) + "ms");
-		
-		return assembler.toModel(books);
-	}
+//	@GetMapping
+//	public PagedModel<EntityModel<BookDTO>> getBooksPage (
+//			@RequestParam(name = "page", defaultValue = "1") int page,
+//			@RequestParam(name = "size", defaultValue = "20") int size,
+//			@RequestParam(name = "sortBy", defaultValue = "title") String sortBy,
+//			@RequestParam(name = "direction", defaultValue = "asc") String direction,
+//			PagedResourcesAssembler<BookDTO> assembler
+//			) {
+//		Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.fromString(direction), sortBy));
+//		
+//		long start = System.currentTimeMillis();
+//		
+//		Page<BookDTO> books = bookService.getAllBooksPage(pageable);
+//		
+//		long end = System.currentTimeMillis();
+//		System.out.println("[Page] 소요 시간 : " + (end - start) + "ms");
+//		
+//		return assembler.toModel(books);
+//	}
 	
-	@GetMapping("/slice")
+	@GetMapping()
 	public Slice<BookDTO> getBooksSlice (
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "20") int size,

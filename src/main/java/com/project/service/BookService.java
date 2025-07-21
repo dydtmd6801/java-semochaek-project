@@ -25,18 +25,18 @@ public class BookService {
 	private final BookRepository bookRepository;
 	private final BookRepositorySlice bookRepositorySlice;
 	
-	public Page<BookDTO> getAllBooksPage(Pageable pageable) {
-		Page<Book> books = bookRepository.findAllByPriceNot(0, pageable);
-		
-		return books.map((Book book) -> BookDTO.builder()
-						.title(book.getTitle())
-						.author(book.getAuthor())
-						.publisher(book.getPublisher())
-						.isbn(book.getIsbn())
-						.image(book.getImage())
-						.price(book.getPrice())
-						.build());
-	}
+//	public Page<BookDTO> getAllBooksPage(Pageable pageable) {
+//		Page<Book> books = bookRepository.findAllByPriceNot(0, pageable);
+//		
+//		return books.map((Book book) -> BookDTO.builder()
+//						.title(book.getTitle())
+//						.author(book.getAuthor())
+//						.publisher(book.getPublisher())
+//						.isbn(book.getIsbn())
+//						.image(book.getImage())
+//						.price(book.getPrice())
+//						.build());
+//	}
 	
 	public Slice<BookDTO> getAllBooksSlice(Pageable pageable) {
 		Slice<Book> books = bookRepositorySlice.findAllByPriceNot(0, pageable);
