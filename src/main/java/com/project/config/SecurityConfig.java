@@ -35,7 +35,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/login", "/register", "/send-code", "/verify-code", "/findEmail", "/resetPassword", "/books/**").permitAll()
 					.requestMatchers("/api/admin/**").hasRole("ADMIN")
-					.requestMatchers("/addCart").hasRole("USER")
+					.requestMatchers("/addCart", "/searchCart").hasRole("USER")
 					.anyRequest().authenticated()
 				)
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
