@@ -34,7 +34,6 @@ async function addCart(isbn) {
 
 async function loadCartList() {
     const cartBooksContainer = document.getElementsByClassName("cart-books-container")[0];
-    console.log(cartBooksContainer);
     const token = localStorage.getItem("token");
 
     if (token == null) {
@@ -82,7 +81,7 @@ async function loadCartList() {
         cartBookTitle.textContent = `${book.title}`;
         const cartBookPrice = document.createElement("p");
         cartBookPrice.className = "cart-book-price";
-        cartBookPrice.textContent = `${book.price}`;
+        cartBookPrice.textContent = `${book.price}원`;
         cartBookInfoDiv.appendChild(cartBookTitle);
         cartBookInfoDiv.appendChild(cartBookPrice);
         cartBookInfo.appendChild(cartBookInfoDiv);
@@ -94,21 +93,27 @@ async function loadCartList() {
         // 개수에 따른 가격 - 개수 곱 가격
         const cartBookQuantityByPrice = document.createElement("p");
         cartBookQuantityByPrice.className = "cart-book-quantity-by-price";
-        cartBookQuantityByPrice.textContent = ""
+        cartBookQuantityByPrice.textContent = `${cartBookPrice.textContent}`;
         cartBookQuantityByPriceContainer.appendChild(cartBookQuantityByPrice);
 
         // 개수에 따른 가격 - 개수 카운팅
         const cartBookQuantityContainer = document.createElement("div");
         cartBookQuantityContainer.className = "cart-book-quantity-container";
+        const cartBookQuantity = document.createElement("div")
+        cartBookQuantity.className = "cart-book-quantity";
+        cartBookQuantity.textContent = "1";
         const btnCartBookQuantityMinus = document.createElement("button");
         btnCartBookQuantityMinus.className = "btn-cart-book-quantity-minus";
         btnCartBookQuantityMinus.textContent = "-"
+        btnCartBookQuantityMinus.addEventListener("click", () => {
+            minusBookQuantity(cartBookQuantityByPrice, cartBookQuantity, cartBookPrice);
+        });
         const btnCartBookQuantityPlus = document.createElement("button");
         btnCartBookQuantityPlus.className = "btn-cart-book-quantity-plus";
         btnCartBookQuantityPlus.textContent = "+";
-        const cartBookQuantity = document.createElement("div")
-        cartBookQuantity.className = "cart-book-quantity";
-        cartBookQuantity.textContent = "0";
+        btnCartBookQuantityPlus.addEventListener("click", () => {
+            plusBookQuantity(cartBookQuantityByPrice, cartBookQuantity, cartBookPrice);
+        });
         cartBookQuantityContainer.appendChild(btnCartBookQuantityMinus);
         cartBookQuantityContainer.appendChild(cartBookQuantity);
         cartBookQuantityContainer.appendChild(btnCartBookQuantityPlus);
@@ -134,6 +139,23 @@ function loadList() {
     document.addEventListener("DOMContentLoaded", async() => {
         loadCartList();
     })
+}
+
+function plusBookQuantity(quantityByPrice, cartBookQuantity, bookPrice) {
+    cartBookQuantity.textContent = parseInt(cartBookQuantity.textContent) + 1;
+    calcQuantity(quantityByPrice, cartBookQuantity, bookPrice);
+}
+
+function minusBookQuantity(quantityByPrice, cartBookQuantity, bookPrice) {
+    if (cartBookQuantity.textContent > 1) {
+        cartBookQuantity.textContent = parseInt(cartBookQuantity.textContent) - 1;
+    }
+    calcQuantity(quantityByPrice, cartBookQuantity, bookPrice);
+}
+
+function calcQuantity(quantityByPrice, quantity, bookPrice) {
+    quantityByPrice.textContent = parseInt(quantity.textContent) * parseInt(bookPrice.textContent);
+    quantityByPrice.textContent += "원";
 }
 
 export default {addCart, loadList};
