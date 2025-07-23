@@ -13,4 +13,5 @@ public class CartResponseDTO {
 	private String title;
 	private String isbn;
 	private String image;
+	private int price;
 }

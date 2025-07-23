@@ -43,6 +43,7 @@ public class CartService {
 						.title(cart.getBook().getTitle())
 						.isbn(cart.getBook().getIsbn())
 						.image(cart.getBook().getImage())
+						.price(cart.getBook().getPrice())
 						.build())
 				.collect(Collectors.toList());
 	}
