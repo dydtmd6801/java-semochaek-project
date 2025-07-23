@@ -59,11 +59,6 @@ async function loadCartList() {
         const cartBook = document.createElement("div");
         cartBook.className = "cart-book";
 
-        // 체크박스
-        const checkBox = document.createElement("input");
-        checkBox.type = "checkbox";
-        checkBox.className = "check-box";
-
         // 도서 정보
         const cartBookInfo = document.createElement("div");
         cartBookInfo.className = "cart-book-info";
@@ -106,19 +101,35 @@ async function loadCartList() {
         btnCartBookQuantityMinus.className = "btn-cart-book-quantity-minus";
         btnCartBookQuantityMinus.textContent = "-"
         btnCartBookQuantityMinus.addEventListener("click", () => {
-            minusBookQuantity(cartBookQuantityByPrice, cartBookQuantity, cartBookPrice);
+            minusBookQuantity(cartBookQuantityByPrice, cartBookQuantity, cartBookPrice, checkState);
         });
         const btnCartBookQuantityPlus = document.createElement("button");
         btnCartBookQuantityPlus.className = "btn-cart-book-quantity-plus";
         btnCartBookQuantityPlus.textContent = "+";
         btnCartBookQuantityPlus.addEventListener("click", () => {
-            plusBookQuantity(cartBookQuantityByPrice, cartBookQuantity, cartBookPrice);
+            plusBookQuantity(cartBookQuantityByPrice, cartBookQuantity, cartBookPrice, checkState);
         });
         cartBookQuantityContainer.appendChild(btnCartBookQuantityMinus);
         cartBookQuantityContainer.appendChild(cartBookQuantity);
         cartBookQuantityContainer.appendChild(btnCartBookQuantityPlus);
 
         cartBookQuantityByPriceContainer.appendChild(cartBookQuantityContainer);
+
+        // 체크박스
+        let checkState = false;
+        const checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.className = "check-box";
+        checkBox.addEventListener("click", () => {
+            if(checkBox.checked) {
+                checkState = true;
+                calcPlusTotalPrice(cartBookQuantityByPrice);
+            } else {
+                checkState = false;
+                calcMinusTotalPrice(cartBookQuantityByPrice);
+            }
+        })
+
 
         //삭제 버튼
         const btnCartBookDelete = document.createElement("button")
@@ -141,21 +152,43 @@ function loadList() {
     })
 }
 
-function plusBookQuantity(quantityByPrice, cartBookQuantity, bookPrice) {
+function plusBookQuantity(quantityByPrice, cartBookQuantity, bookPrice, ischeck) {
+    let totalPrice = document.getElementsByClassName("cart-book-total-price")[1];
     cartBookQuantity.textContent = parseInt(cartBookQuantity.textContent) + 1;
     calcQuantity(quantityByPrice, cartBookQuantity, bookPrice);
+    if (ischeck) {
+        totalPrice.textContent = parseInt(totalPrice.textContent) + parseInt(bookPrice.textContent);
+    }
 }
 
-function minusBookQuantity(quantityByPrice, cartBookQuantity, bookPrice) {
+function minusBookQuantity(quantityByPrice, cartBookQuantity, bookPrice, ischeck) {
+    let totalPrice = document.getElementsByClassName("cart-book-total-price")[1];
     if (cartBookQuantity.textContent > 1) {
         cartBookQuantity.textContent = parseInt(cartBookQuantity.textContent) - 1;
     }
     calcQuantity(quantityByPrice, cartBookQuantity, bookPrice);
+    if (ischeck) {
+        if (parseInt(totalPrice.textContent) - parseInt(quantityByPrice.textContent) >= 0) {
+            totalPrice.textContent = parseInt(totalPrice.textContent) - parseInt(bookPrice.textContent);
+        }
+    }
 }
 
 function calcQuantity(quantityByPrice, quantity, bookPrice) {
     quantityByPrice.textContent = parseInt(quantity.textContent) * parseInt(bookPrice.textContent);
     quantityByPrice.textContent += "원";
+}
+
+function calcPlusTotalPrice(quantityByPrice) {
+    let totalPrice = document.getElementsByClassName("cart-book-total-price")[1];
+    totalPrice.textContent = parseInt(quantityByPrice.textContent) + parseInt(totalPrice.textContent);
+}
+
+function calcMinusTotalPrice(quantityByPrice) {
+    let totalPrice = document.getElementsByClassName("cart-book-total-price")[1];
+    if (parseInt(totalPrice.textContent) - parseInt(quantityByPrice.textContent) >= 0) {
+        totalPrice.textContent = parseInt(totalPrice.textContent) - parseInt(quantityByPrice.textContent);
+    }
 }
 
 export default {addCart, loadList};
