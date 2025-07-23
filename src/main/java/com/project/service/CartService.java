@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,9 +23,19 @@ public class CartService {
 	private final UserService userService;
 	private final BookService bookService;
 	
-	public void saveCart(String email, String isbn) {
+	public boolean saveCart(String email, String isbn) {
 		User user = userService.loadUser(email);
 		Book book = bookService.loadBook(isbn);
+		List<Cart> carts = cartRepository.findAllByUser(user);
+		List<Long> cartBookId = new ArrayList<>();
+		
+		for (Cart cart: carts) {
+			cartBookId.add(cart.getBook().getBook_id());
+		}
+		
+		if (cartBookId.contains(book.getBook_id())) {
+			return false;
+		}
 		
 		Cart cart = Cart.builder()
 				.user(user)
@@ -32,6 +43,7 @@ public class CartService {
 				.build();
 		
 		cartRepository.save(cart);
+		return true;
 	}
 	
 	public List<CartResponseDTO> loadCartList(String email) {
