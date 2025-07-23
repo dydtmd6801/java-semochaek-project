@@ -29,7 +29,9 @@ public class CartController {
 	public ResponseEntity<?> addCart(@RequestParam("isbn") String isbn) {
 		try {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
-			cartService.saveCart(email, isbn);
+			if (!cartService.saveCart(email, isbn)) {
+				return ResponseEntity.ok("장바구니 중복");
+			}
 			return ResponseEntity.ok("저장 완료");
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
