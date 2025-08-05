@@ -45,9 +45,9 @@ public class CartController {
 	}
 	
 	@GetMapping("/deleteCart")
-	public ResponseEntity<?> deleteCart(@RequestBody CartRequest request) {
+	public ResponseEntity<?> deleteCart(@RequestParam("isbn") String isbn) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		cartService.removeCart(email, request.getIsbn());
+		cartService.removeCart(email, isbn);
 		return ResponseEntity.ok("삭제 완료");
 	}
 }
