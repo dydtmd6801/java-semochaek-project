@@ -135,6 +135,9 @@ async function loadCartList() {
         const btnCartBookDelete = document.createElement("button")
         btnCartBookDelete.className = "btn-cart-book-delete"
         btnCartBookDelete.textContent = "ｘ";
+        btnCartBookDelete.addEventListener("click", () => {
+            deleteCartBook(book.isbn);
+        });
 
         cartBook.appendChild(checkBox);
         cartBook.appendChild(cartBookInfo);
@@ -189,6 +192,33 @@ function calcMinusTotalPrice(quantityByPrice) {
     if (parseInt(totalPrice.textContent) - parseInt(quantityByPrice.textContent) >= 0) {
         totalPrice.textContent = parseInt(totalPrice.textContent) - parseInt(quantityByPrice.textContent);
     }
+}
+
+function deleteCartBook(isbn) {
+    const token = localStorage.getItem("token");
+
+    if (token == null) {
+        alert("로그인이 필요합니다.");
+        location.href="login.html";
+        return;
+    }
+
+    if (validator.validateToken(token)) {
+        alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
+        location.href="login.html";
+        return;
+    }
+
+    axios.get(`http://localhost:8080/deleteCart?isbn=${isbn}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(() => {
+        alert("장바구니에서 제거되었습니다.");
+        location.reload(true);
+    });
 }
 
 export default {addCart, loadList};
