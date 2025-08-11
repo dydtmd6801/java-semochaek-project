@@ -21,8 +21,8 @@ async function addCart(isbn) {
             "Content-Type": "application/json"
         }
     })
-    
-    if (result.data == "중복") {
+
+    if (result.data == "장바구니 중복") {
         if(confirm("이미 장바구니에 있는 책입니다.\n장바구니로 이동하시겠습니까?")) {
             location.href = "userCart.html";
         }
