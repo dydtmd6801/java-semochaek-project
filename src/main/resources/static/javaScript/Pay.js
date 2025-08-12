@@ -20,9 +20,28 @@ function bookPay() {
         return;
     }
 
+    let items = [];
     const decoded = jwt_decode(token);
     const totalPrice = document.getElementsByClassName("cart-book-total-price")[1];
     const IMP = window.IMP;
+
+    const checkboxs = document.getElementsByClassName("check-box");
+    const isbns = document.getElementsByClassName("book-isbn");
+    const quantitys = document.getElementsByClassName("cart-book-quantity");
+    const prices = document.getElementsByClassName("cart-book-price");
+    for (let i = 0; i < checkboxs.length; i++) {
+        if (checkboxs[i].checked) {
+            let priceText = prices[i].textContent;
+            let price = priceText.substring(0, priceText.length - 1);
+            const item = {
+                bookIsbn: isbns[i].value,
+                quantity: Number(quantitys[i].textContent),
+                price: Number(price)
+            };
+
+            items.push(item);
+        }
+    }
 
     IMP.init(IMP_MERCHANT_ID);
 
@@ -36,9 +55,29 @@ function bookPay() {
     }, function (rsp) {
         if (rsp.success) {
             //결제 성공 시 처리
-            alert("결제가 완료되었습니다.");
+            axios.post("http://localhost:8080/api/payments/verify",
+                {
+                    impUid: rsp.imp_uid,
+                    merchantUid: rsp.merchant_uid,
+                    items: items
+                }, 
+                {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            })
+            .then(() => {
+                alert("결제가 완료되었습니다.");
+                location.href = "paymentResult.html";
+            })
+            .catch(() => {
+                alert("결제 금액이 올바르지 않습니다.");
+                location.reload(true);
+            })
         } else {
             //결제 실패 시 처리
+            alert("결제를 취소하였습니다.");
         }
     });
 }
