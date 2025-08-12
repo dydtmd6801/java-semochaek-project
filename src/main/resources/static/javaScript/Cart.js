@@ -77,8 +77,13 @@ async function loadCartList() {
         const cartBookPrice = document.createElement("p");
         cartBookPrice.className = "cart-book-price";
         cartBookPrice.textContent = `${book.price}원`;
+        const cartBookIsbn = document.createElement("input");
+        cartBookIsbn.type = "hidden";
+        cartBookIsbn.value = `${book.isbn}`;
+        cartBookIsbn.className = "book-isbn";
         cartBookInfoDiv.appendChild(cartBookTitle);
         cartBookInfoDiv.appendChild(cartBookPrice);
+        cartBookInfoDiv.appendChild(cartBookIsbn);
         cartBookInfo.appendChild(cartBookInfoDiv);
 
         // 개수에 따른 가격
