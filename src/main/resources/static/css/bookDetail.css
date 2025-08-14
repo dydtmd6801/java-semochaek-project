@@ -1,6 +1,13 @@
 header .spacer {
     text-align: right;
 }
+
+section > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .title-wrapper {
     height: 12vh;
     width: 100%;
@@ -16,6 +23,7 @@ header .spacer {
 .top {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 .image-wrapper {
     width: 50%;
@@ -23,7 +31,7 @@ header .spacer {
     justify-content: flex-end;
 }
 .image-wrapper img {
-    width: 50%;
+    width: 35%;
 }
 .book-price-n-btns {
     width: 50%;
@@ -44,7 +52,6 @@ header .spacer {
     margin: 10px;
 }
 .btns-container {
-    height: 50%;
     width: 80%;
     padding: 30px;
 }
@@ -61,14 +68,16 @@ header .spacer {
     align-items: center;
 }
 .btns-container div a:nth-child(1) {
-    background-color: #fe3e3e;
+    background-color: #2563EB;
     color: white
 }
 .btns-container div a:nth-child(2) {
-    background-color: burlywood;
+    background-color: #38BDF8;
+    color: white;
 }
 .btns-container div a:nth-child(3) {
-    background-color: purple;
+    background-color: #F0F4F8;
+    color: black;
 }
 
 .separator {
@@ -84,7 +93,7 @@ header .spacer {
     justify-content: center;
 }
 .bottom > div {
-    width: 80%;
+    width: 1024px
 }
 .medium-title {
     font-size: 1.5em;
