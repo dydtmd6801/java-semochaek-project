@@ -1,8 +1,14 @@
 header {
     margin-bottom: 2vh;
+    position: fixed;
+    width: 100%;
+    background-color: white
 }
 header .spacer {
     text-align: right;
+}
+section {
+    margin-top: 12vh;
 }
 section .bookMenu {
     width: 100%;
@@ -68,6 +74,8 @@ footer {
     margin-bottom: 8px;
     font-weight: bold;
     font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    width: fit-content;
 }
 
 .book-sub-info {
@@ -91,16 +99,21 @@ footer {
 .btn-favorite, .btn-cart, .btn-buy {
     width: 100px;
     height: 40px;
-    background-color: white;
     margin: 5px;
-    border: 1px solid grey;
+    border: none;
     border-radius: 10px;
     text-align: center;
     line-height: 40px;
     font-size: 0.9em;
+    color: white;
 }
 .btn-favorite {
-    background-color: #fe3e3e;
-    color: white;
-    border: none;
+    background-color: #2563EB;
+}
+.btn-cart {
+    background-color: #38BDF8;
+}
+.btn-buy {
+    background-color: #F0F4F8;
+    color: black;
 }
