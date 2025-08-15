@@ -1,4 +1,4 @@
-const totalPage = 565;
+const totalPage = Number(localStorage.getItem("bookCount"));
 const pageBtn = document.getElementsByClassName("page-btn");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
