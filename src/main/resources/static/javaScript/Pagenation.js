@@ -12,13 +12,13 @@ if (page) {
 if (currentPage < 11) {
     prevBtn.style.display = "none";
 } else {
-    prevBtn.style.display = "inline";
+    prevBtn.style.display = "inline-flex";
 }
 
 if (currentPage > Math.floor(totalPage / 10) * 10) { 
     nextBtn.style.display = "none";
 } else {
-    nextBtn.style.display = "inline";
+    nextBtn.style.display = "inline-flex";
 }
 
 nextBtn.addEventListener("click", () => {
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded",() => {
     }
     for (let i = 0; i < pageBtn.length; i++) {
         if (pageBtn[i].textContent == page) {
-            pageBtn[i].style.backgroundColor = "red";
+            pageBtn[i].className = "page-btn current"
         }
     }
 })
