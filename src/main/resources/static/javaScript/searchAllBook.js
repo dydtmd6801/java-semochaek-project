@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", async() => {
     const bookList = document.getElementById("books");
 
     try {
-        const response = await axios.get("http://localhost:8080/books");
+        const page = param.get("page");
+        const response = await axios.get(`http://localhost:8080/books?page=${page}`);
 
         // const books = response.data._embedded?.bookDTOList || [];
         const books = response.data.content;
