@@ -72,4 +72,9 @@ public class BookController {
 	public BookDetailDTO getDetail(@RequestParam("isbn") String isbn) {
 		return bookService.getBookDetail(isbn);
 	}
+	
+	@GetMapping("/count")
+	public Long getBookCount() {
+		return bookService.bookCount();
+	}
 }
