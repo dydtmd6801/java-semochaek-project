@@ -73,5 +73,9 @@ public class BookService {
 		return bookRepository.findByIsbn(isbn)
 				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 책입니다."));
 	}
+	
+	public Long bookCount() {
+		return bookRepository.countBy();
+	}
 }
 
