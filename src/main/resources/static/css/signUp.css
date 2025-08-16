@@ -57,4 +57,9 @@ section {
     border-radius: 10px;
     background-color: #2563EB;
     color: white;
+    cursor: pointer;
+}
+.error {
+    color: darkred;
+    font-size: 0.9em !important;
 }
