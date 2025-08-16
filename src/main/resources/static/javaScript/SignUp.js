@@ -36,6 +36,31 @@ function sendMail() {
     })
 }
 
+function verifyCode() {
+    const code = document.getElementsByClassName("codeInput")[0];
+    axios.post("http://localhost:8080/verify-code",
+        {
+            email: String(email.value),
+            code: String(code.value)
+        },
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    )
+    .then(() => {
+        alert("인증이 완료되었습니다.");
+        email.setAttribute("readonly", "readonly");
+        sendMailBtn.setAttribute("disabled", "disabled");
+        sendMailBtn.style.cursor = "default";
+        document.getElementsByClassName("emailBtn")[1].remove();
+    })
+    .catch(() => {
+        alert("코드가 일치하지 않습니다.");
+    })
+}
+
 password.addEventListener("focusin", () => {
     document.getElementsByClassName("error")[0].remove();
 })
@@ -55,6 +80,7 @@ sendMailBtn.addEventListener("click",() => {
         codeInput.className = "codeInput"
         const verifyBtn = document.createElement("button");
         verifyBtn.textContent = "인증받기"
+        verifyBtn.addEventListener("click", verifyCode);
         div.appendChild(codeInput);
         div.appendChild(verifyBtn);
         emailDiv.appendChild(div);
