@@ -26,14 +26,17 @@ public class MailController {
 	@PostMapping("/send-code")
 	public ResponseEntity<?> sendCode(@RequestBody String email) {
 		String code = UUID.randomUUID().toString().substring(0, 6);
+		System.out.println(code);
 		mailService.sendVerificationEmail(email, code);
+		System.out.println("email : " + email);
 		verificationCodes.put(email, code);
 		return ResponseEntity.ok("인증코드가 전송되었습니다.");
 	}
 	
 	@PostMapping("/verify-code")
 	public ResponseEntity<?> verifyCode(@RequestBody VerifyRequest request) {
-		String savedCode = verificationCodes.get(request.getEmail());
+		String userEmail = "\"" + request.getEmail() + "\"";
+		String savedCode = verificationCodes.get(userEmail);
 		System.out.println("saved : " + savedCode + " , code : " + request.getCode());
 		if (savedCode != null && savedCode.equals(request.getCode())) {
 			return ResponseEntity.ok("이메일 인증 완료");
