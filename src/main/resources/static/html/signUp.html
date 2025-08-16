@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="../javaScript/SignUp.js"></script>
     <title>회원가입</title>
 </head>
@@ -30,9 +31,9 @@
                 <p id="title">회원가입</p>
                 <div id="email">
                     <p>이메일</p>
-                    <div>
-                        <input type="input" placeholder="이메일" />
-                        <button>인증받기</button>
+                    <div class="emailBtn">
+                        <input id="emailValue" type="input" placeholder="이메일" />
+                        <button id="send-mail-btn">인증받기</button>
                     </div>
                 </div>
                 <div id="password">
