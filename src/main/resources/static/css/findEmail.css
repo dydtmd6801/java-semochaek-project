@@ -12,6 +12,7 @@ section {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    align-items: center;
 }
 #title {
     font-size: 1.8em !important;
@@ -43,4 +44,13 @@ section {
     background-color: #2563EB;
     color: white;
     cursor: pointer;
+}
+.email-result {
+    margin-top: 30px !important;
+    width: 500px !important;
+    text-align: center;
+}
+.email-result-data {
+    font-size: 1.3em;
+    font-weight: 500;
 }
