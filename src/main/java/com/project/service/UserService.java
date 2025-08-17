@@ -30,9 +30,9 @@ public class UserService {
 				.telephone(request.getPhoneNumber())
 				.role("ROLE_USER")
 				.status("N")
-				.address(request.getAddress())
-				.detailAddress(request.getDetailAddress())
-				.postNumber(request.getPostNumber())
+//				.address(request.getAddress())
+//				.detailAddress(request.getDetailAddress())
+//				.postNumber(request.getPostNumber())
 				.build();
 				
 		userRepository.save(user);

@@ -9,7 +9,7 @@ public class RegisterRequest {
 	private String name;
 	private String phoneNumber;
 	private String status;
-	private String address;
-	private String detailAddress;
-	private Integer postNumber;
+//	private String address;
+//	private String detailAddress;
+//	private Integer postNumber;
 }
