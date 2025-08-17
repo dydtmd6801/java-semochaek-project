@@ -27,8 +27,22 @@ async function findEmail() {
             }
         }
     )
-    .then(() => {
-        location.href = "findEmailResult.html";
+    .then((result) => {
+        document.getElementById("name-div").remove();
+        document.getElementById("telephone-div").remove();
+        findEmailBtn.remove();
+        const findEmail = document.getElementById("find-email");
+        const p = document.createElement("p");
+        p.className = "email-result"
+        p.innerHTML = `회원님의 이메일은 <span class="email-result-data">${result.data}</span> 입니다.`
+        const button = document.createElement("button");
+        button.textContent = "로그인하러가기";
+        button.id = "find-btn";
+        button.addEventListener("click", () => {
+            location.href = "login.html";
+        })
+        findEmail.appendChild(p);
+        findEmail.appendChild(button);
     })
     .catch(() => {
         alert("존재하지 않은 회원입니다.");
