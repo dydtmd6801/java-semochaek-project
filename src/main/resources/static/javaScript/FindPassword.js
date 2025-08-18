@@ -21,6 +21,67 @@ function sendEmail() {
     })
 }
 
+function verifyInputCode() {
+    const code = document.getElementsByClassName("codeInput")[0];
+    axios.post("http://localhost:8080/verify-code",
+        {
+            email: String(email.value),
+            code: String(code.value)
+        },
+        {
+            headers : {
+                "Content-type" : "application/json"
+            }
+        }
+    )
+    .then(() => {
+        verifyEmailDiv.remove();
+        showNewPasswordForm();
+    })
+    .catch(() => {
+        alert("인증번호가 올바르지 않습니다.");
+    })
+}
+
+function showNewPasswordForm() {
+    const verifyEmail = document.getElementById("verify-email");
+
+    const mainDiv = document.createElement("div");
+    mainDiv.id = "newPassword-div";
+
+    const p = document.createElement("p");
+    p.textContent = "새로운 비밀번호";
+
+    const newPasswordDiv = document.createElement("div");
+    newPasswordDiv.className = "password-div"
+
+    const newPasswordInput = document.createElement("input");
+    newPasswordInput.id = "password";
+    newPasswordInput.type = "password";
+    newPasswordInput.placeholder = "새 비밀번호를 입력하세요";
+    newPasswordDiv.appendChild(newPasswordInput);
+
+    const confirmPassword = document.createElement("div");
+    confirmPassword.className = "password-div"
+
+    const confirmPasswordInput = document.createElement("input");
+    confirmPasswordInput.id = "password";
+    confirmPasswordInput.type = "password";
+    confirmPasswordInput.placeholder = "비밀번호 확인";
+    confirmPassword.appendChild(confirmPasswordInput);
+
+    const button = document.createElement("button");
+    button.id = "resetPassword";
+    button.textContent = "입력완료";
+
+    mainDiv.appendChild(p);
+    mainDiv.appendChild(newPasswordDiv);
+    mainDiv.appendChild(confirmPassword);
+    mainDiv.appendChild(button);
+
+    verifyEmail.appendChild(mainDiv);
+}
+
 function showVerifyCode() {
     const div = document.createElement("div");
     div.className = "email-div";
@@ -30,6 +91,7 @@ function showVerifyCode() {
     const btn = document.createElement("button");
     btn.textContent = "인증받기";
     btn.className = "btns";
+    btn.addEventListener("click", verifyInputCode);
     div.appendChild(input);
     div.appendChild(btn);
     verifyEmailDiv.appendChild(div);
