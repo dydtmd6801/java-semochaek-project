@@ -2,6 +2,8 @@ const verifyBtn = document.getElementById("verify-btn");
 const verifyEmailDiv = document.getElementById("verify-email-div");
 const btns = document.getElementsByClassName("btns");
 
+let passwordChecker = false;
+
 function sendEmail() {
     const email = document.getElementById("email");
     axios.post("http://localhost:8080/send-code",
@@ -19,6 +21,18 @@ function sendEmail() {
         alert("올바른 이메일을 입력해주세요.");
         location.reload(true);
     })
+}
+
+function checkPassword() {
+    const newPassword = document.getElementById("newPassword");
+    const confirmPassword = document.getElementById("confirmPassword");
+
+    if (newPassword.value !== confirmPassword.value) {
+        passwordChecker = false;
+        alert("비밀번호가 올바르지 않습니다.\n다시 입력해주세요");
+    } else {
+        passwordChecker = true;
+    }
 }
 
 function verifyInputCode() {
@@ -56,7 +70,7 @@ function showNewPasswordForm() {
     newPasswordDiv.className = "password-div"
 
     const newPasswordInput = document.createElement("input");
-    newPasswordInput.id = "password";
+    newPasswordInput.id = "newPassword";
     newPasswordInput.type = "password";
     newPasswordInput.placeholder = "새 비밀번호를 입력하세요";
     newPasswordDiv.appendChild(newPasswordInput);
@@ -65,9 +79,12 @@ function showNewPasswordForm() {
     confirmPassword.className = "password-div"
 
     const confirmPasswordInput = document.createElement("input");
-    confirmPasswordInput.id = "password";
+    confirmPasswordInput.id = "confirmPassword";
     confirmPasswordInput.type = "password";
     confirmPasswordInput.placeholder = "비밀번호 확인";
+    confirmPasswordInput.addEventListener("focusout", () => {
+        checkPassword();
+    })
     confirmPassword.appendChild(confirmPasswordInput);
 
     const button = document.createElement("button");
