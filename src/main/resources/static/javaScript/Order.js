@@ -58,6 +58,9 @@ function createOrderList(orderList) {
         const detailBtn = document.createElement("button");
         detailBtn.className = "detail-btn"
         detailBtn.textContent = "상세보기"
+        detailBtn.addEventListener("click", () => {
+            location.href = `detailOrder.html?id=${order.orderId}`;
+        })
         detail.appendChild(detailBtn);
 
         orderDiv.appendChild(date);
