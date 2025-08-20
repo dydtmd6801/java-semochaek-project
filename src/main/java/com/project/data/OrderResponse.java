@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class OrderResponse {
+	private String merchantId;
 	private int amount;
 	private Date paidAt;
 	private List<DetailOrderResponse> detailOrders;
