@@ -1,7 +1,6 @@
 package com.project.service;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.data.DetailOrderResponse;
 import com.project.data.OrderItemRequest;
-import com.project.data.OrderResponse;
 import com.project.data.PaymentVerifyRequest;
 import com.project.entity.Book;
 import com.project.entity.DetailOrder;
@@ -28,7 +25,6 @@ import com.project.repository.DetailOrderRepository;
 import com.project.repository.OrderRepository;
 import com.project.repository.UserRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -124,30 +120,5 @@ public class PaymentService {
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException("JSON 변환 중 오류 발생", e);
 		}
-	}
-	
-	public List<OrderResponse> getOrderList (String email) {
-		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
-		
-		List<Order> orders = orderRepository.findAllByUser(user);
-		
-		return orders.stream().map(order -> {
-			List<DetailOrder> detailOrders = detailOrderRepository.findByOrder(order);
-			List<DetailOrderResponse> response = detailOrders.stream()
-					.map(details -> new DetailOrderResponse(
-							details.getBook().getIsbn(),
-							details.getBook().getTitle(),
-							details.getQuantity(),
-							details.getPrice()
-					))
-					.toList();
-			
-			return new OrderResponse(
-					order.getAmount(),
-					order.getPaidAt(),
-					response
-			);
-		}).toList();
 	}
 }
