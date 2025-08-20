@@ -53,13 +53,23 @@ function createOrderList(orderList) {
         totalPrice.className = "total-price";
         totalPrice.textContent = `${order.amount}원`;
 
+        const detailOrderContainer = document.createElement("div");
+        detailOrderContainer.className = "detail-order-container";
+
         const detail = document.createElement("div");
         detail.className = "detail"
         const detailBtn = document.createElement("button");
         detailBtn.className = "detail-btn"
         detailBtn.textContent = "상세보기"
         detailBtn.addEventListener("click", () => {
-            location.href = `detailOrder.html?id=${order.orderId}`;
+            if (detailBtn.textContent === "상세보기") {
+                detailOrderContainer.style.display = "block";
+                detailBtn.textContent = "닫기"
+            } else {
+                detailOrderContainer.style.display = "none";
+                detailBtn.textContent = "상세보기"
+            }
+            
         })
         detail.appendChild(detailBtn);
 
@@ -68,7 +78,38 @@ function createOrderList(orderList) {
         orderDiv.appendChild(totalPrice);
         orderDiv.appendChild(detail);
 
+        order.detailOrders.forEach(detailOrder => {
+            const detailOrderDiv = document.createElement("div");
+            detailOrderDiv.className = "detail-order"
+
+            const imageDiv = document.createElement("div");
+            imageDiv.className = "image-div"
+            const image = document.createElement("img");
+            image.src = detailOrder.image;
+            image.className = "image"
+            imageDiv.appendChild(image);
+
+            const title = document.createElement("div");
+            title.className = "title"
+            title.textContent = detailOrder.title;
+
+            const quantity = document.createElement("div");
+            quantity.className = "quantity";
+            quantity.textContent = `${detailOrder.quantity}권`
+            
+            const price = document.createElement("div");
+            price.className = "price";
+            price.textContent = `${detailOrder.price}원`;
+
+            detailOrderDiv.appendChild(imageDiv);
+            detailOrderDiv.appendChild(title);
+            detailOrderDiv.appendChild(quantity);
+            detailOrderDiv.appendChild(price);
+
+            detailOrderContainer.appendChild(detailOrderDiv);
+        })
         totalOrder.appendChild(orderDiv);
+        totalOrder.appendChild(detailOrderContainer);
     });
 }
 
