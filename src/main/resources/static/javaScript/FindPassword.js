@@ -35,6 +35,27 @@ function checkPassword() {
     }
 }
 
+function resetPassword() {
+    const email = document.getElementById("hiddenEmail");
+    const confirmPassword = document.getElementById("confirmPassword");
+
+    axios.post("http://localhost:8080/resetPassword",
+        {
+            email: String(email.value),
+            password: String(confirmPassword.value)
+        }, 
+        {
+            headers : {
+                "Content-type" : "application/json"
+            }
+        }
+    )
+    .then(() => {
+        alert("비밀번호가 수정되었습니다.");
+        location.href = "login.html"
+    })
+}
+
 function verifyInputCode() {
     const code = document.getElementsByClassName("codeInput")[0];
     axios.post("http://localhost:8080/verify-code",
@@ -49,8 +70,8 @@ function verifyInputCode() {
         }
     )
     .then(() => {
-        verifyEmailDiv.remove();
         showNewPasswordForm();
+        verifyEmailDiv.remove();
     })
     .catch(() => {
         alert("인증번호가 올바르지 않습니다.");
@@ -58,7 +79,13 @@ function verifyInputCode() {
 }
 
 function showNewPasswordForm() {
+    const email = document.getElementById("email");
     const verifyEmail = document.getElementById("verify-email");
+
+    const hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.value = email.value;
+    hidden.id = "hiddenEmail";
 
     const mainDiv = document.createElement("div");
     mainDiv.id = "newPassword-div";
@@ -90,11 +117,15 @@ function showNewPasswordForm() {
     const button = document.createElement("button");
     button.id = "resetPassword";
     button.textContent = "입력완료";
+    button.addEventListener("click", () => {
+        resetPassword();
+    })
 
     mainDiv.appendChild(p);
     mainDiv.appendChild(newPasswordDiv);
     mainDiv.appendChild(confirmPassword);
     mainDiv.appendChild(button);
+    mainDiv.appendChild(hidden);
 
     verifyEmail.appendChild(mainDiv);
 }
