@@ -59,6 +59,16 @@ public class UserController {
 		}
 	}
 	
+	@PostMapping("/getUserInfo")
+	public ResponseEntity<?> getUserInfo() {
+		try {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			return ResponseEntity.ok(userService.loadUserInfo(email));
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
 	@PostMapping("/changeName")
 	public ResponseEntity<?> changeName (@RequestBody String name) {
 		try {
