@@ -53,3 +53,30 @@ document.addEventListener("DOMContentLoaded",() => {
     const token = checkToken();
     loadUserInfo(token);
 })
+
+function changeName(newName, token) {
+    axios.post("http://localhost:8080/changeName",
+        newName, {
+            headers : {
+                Authorization: `Bearer ${token}`,
+                "Content-type": "application/json"
+            }
+        }
+    )
+    .then(() => {
+        alert("이름이 변경되었습니다.");
+        location.reload(true);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+}
+
+const nameModifyBtn = document.getElementById("name-modify-btn");
+nameModifyBtn.addEventListener("click", () => {
+    const token = checkToken();
+    const newName = prompt("새로운 이름을 입력하세요");
+    if (newName) {
+        changeName(newName, token);
+    }
+})
