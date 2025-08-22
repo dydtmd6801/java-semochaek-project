@@ -84,7 +84,7 @@ public class UserController {
 	public ResponseEntity<?> changeTelephone (@RequestBody String telephone) {
 		try {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
-			userService.updateName(email, telephone);
+			userService.updateTelephone(email, telephone);
 			return ResponseEntity.ok("업데이트 완료");
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
