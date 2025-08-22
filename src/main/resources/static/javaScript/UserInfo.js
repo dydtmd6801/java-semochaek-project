@@ -80,3 +80,38 @@ nameModifyBtn.addEventListener("click", () => {
         changeName(newName, token);
     }
 })
+
+function changeTelephone(newTelephone, token) {
+    axios.post("http://localhost:8080/changeTelephone",
+        newTelephone, {
+            headers : {
+                Authorization: `Bearer ${token}`,
+                "Content-type": "application/json"
+            }
+        }
+    )
+    .then(() => {
+        alert("전화번호가 변경되었습니다.");
+        location.reload(true);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+}
+
+const telephoneModifyBtn = document.getElementById("telephone-modify-btn");
+telephoneModifyBtn.addEventListener("click", () => {
+    const token = checkToken();
+    const newTelephone = prompt("새로운 전화번호를 -(하이픈)빼고 입력하세요");
+    if (newTelephone) {
+        if (!isNaN(newTelephone)) {
+            if (newTelephone.length == 11) {
+                changeTelephone(newTelephone, token);
+            } else {
+                alert("올바른 전화번호를 입력하세요");
+            }
+        } else {
+            alert("숫자만 입력하세요");
+        }
+    }
+})
