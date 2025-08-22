@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.data.RegisterRequest;
+import com.project.data.UserResponse;
 import com.project.entity.User;
 import com.project.repository.UserRepository;
 
@@ -83,5 +84,16 @@ public class UserService {
 				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
 		
 		user.setTelephone(telephone);
+	}
+	
+	public UserResponse loadUserInfo(String email) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
+		
+		return UserResponse.builder()
+				.email(user.getEmail())
+				.name(user.getName())
+				.telephone(user.getTelephone())
+				.build();
 	}
 }
