@@ -1,0 +1,70 @@
+section {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section > div > p {
+    font-size: 1.8em;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#profile {
+    width: 600px;
+    height: 202px;
+}
+
+#profile-title {
+    width: 575px;
+    height: 50px;
+    background-color: #2563FB;
+    color: white;
+    border: none;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    font-size: 1.0em;
+    font-weight: 600;
+}
+
+#profile-content {
+    width: 598px;
+    height: 152px;
+    border: 1px solid #2563FB;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+}
+
+#profile-content > div {
+    width: 550px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 25px;
+    border-bottom: 1px solid lightgrey;
+}
+
+#profile-content > div:last-child {
+    border: none;
+}
+
+#name-modify-btn, #telephone-modify-btn {
+    border: none;
+    color: white;
+    background-color: #2563EB;
+    height: 30px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+#email, #name, #telephone {
+    margin-left: 10px;
+    font-size: 0.95em;
+}
