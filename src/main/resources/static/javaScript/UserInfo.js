@@ -43,7 +43,10 @@ function setUserInfo(userInfo) {
 
     email.textContent = userInfo.email;
     name.textContent = userInfo.name;
-    telephone.textContent = userInfo.telephone;
+    const first = userInfo.telephone.substring(0, 3);
+    const second = userInfo.telephone.substring(3, 7);
+    const third = userInfo.telephone.substring(7);
+    telephone.textContent = `${first}-${second}-${third}`;
 }
 
 document.addEventListener("DOMContentLoaded",() => {
