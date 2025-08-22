@@ -70,4 +70,18 @@ public class UserService {
 		return userRepository.findByEmail(email)
 				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
 	}
+	
+	public void updateName(String email, String name) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
+		
+		user.setName(name);
+	}
+	
+	public void updateTelephone(String email, String telephone) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자 입니다."));
+		
+		user.setTelephone(telephone);
+	}
 }
