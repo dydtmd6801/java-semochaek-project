@@ -34,4 +34,10 @@ public class FavoriteController {
 			return ResponseEntity.badRequest().body("잘못된 요청입니다.");
 		}
 	}
+	
+	@GetMapping("/get")
+	public ResponseEntity<?> getFavoriteBook() {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		return ResponseEntity.ok(favoriteService.readFavoirteList(email));
+	}
 }
