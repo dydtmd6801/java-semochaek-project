@@ -1,9 +1,11 @@
 package com.project.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.project.data.FavoriteResponse;
 import com.project.entity.Book;
 import com.project.entity.Favorite;
 import com.project.entity.User;
@@ -44,5 +46,21 @@ public class FavoriteService {
 		
 		favoriteRepository.save(favorite);
 		return true;
+	}
+	
+	public List<FavoriteResponse> readFavoirteList(String email) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException());
+		
+		List<Favorite> favorites = favoriteRepository.findAllByUser(user);
+		
+		return favorites.stream()
+				.map(favorite -> FavoriteResponse.builder()
+						.title(favorite.getBook().getTitle())
+						.isbn(favorite.getBook().getIsbn())
+						.image(favorite.getBook().getImage())
+						.price(favorite.getBook().getPrice())
+						.build())
+				.collect(Collectors.toList());
 	}
 }
