@@ -128,3 +128,16 @@ section > div {
 .info-content:last-child {
     white-space: pre-wrap;
 }
+
+#to-list-btn {
+    border: none;
+    background-color: #2653EB;
+    color: white;
+    font-weight: 500;
+    font-size: 1.2em;
+    width: 300px;
+    height: 50px;
+    border-radius: 12px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
