@@ -85,3 +85,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = checkToken();
     loadFavoriteList(token);
 })
+
+function addFavoriteBook(isbn, token) {
+    axios.get(`http://localhost:8080/favorite/add?isbn=${isbn}`, {
+        header: {
+            Authorization: `Bearer ${token}`,
+            "Content-type": "application/json"
+        }
+    })
+    .then((response) => {
+        if (response.data == "duplicate") {
+            if (confirm("이미 찜 목록에 있는 책입니다.\n찜 목록으로 이동하시겠습니까?")) {
+                location.href = "userFavorite.html";
+            }
+        } else if (response.data == "success") {
+            if (confirm("찜 목록에 추가되었습니다.\n찜 목록으로 이동하시겠습니까?")) {
+                location.href = "userFavorite.html";
+            }
+        }
+    })
+}
+
+export default { addFavoriteBook };
