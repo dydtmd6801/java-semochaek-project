@@ -3,7 +3,7 @@ import validator from "./ValidateToken.js"
 
 const loginWrapper = document.getElementsByClassName("login")[0];
 
-document.addEventListener("DOMContentLoaded", () => {
+function checkLogin() {
     const token = localStorage.getItem("token");
     
     if (token == null) {
@@ -33,4 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loginInfo.appendChild(btnLogout);
         loginWrapper.appendChild(loginInfo);
     }
-})
+}
+
+export default { checkLogin };
