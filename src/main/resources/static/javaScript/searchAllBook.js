@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
             btns.appendChild(btnFavorite);
             btns.appendChild(btnCart);
-            btns.appendChild(btnBuy);
+            // btns.appendChild(btnBuy);
 
             // 조립
             div.appendChild(imageWrapper);
