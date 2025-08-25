@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             title.className = "book-title";
             title.textContent = book.title;
             title.addEventListener("click", async() => {
-                location.href = `bookDetail.html?isbn=${book.isbn}`
+                location.href = `bookDetail.html?isbn=${book.isbn}&page=${page}`
             })
 
             const subInfo = document.createElement("p");
