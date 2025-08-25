@@ -27,40 +27,43 @@
         </header>
         <section>
             <div>
-            <div class="title-wrapper">
-                <p class="book-title"></p>
-            </div>
-            <div class="top">
-                <div class="image-wrapper"><img class="book-image" src=""></div>
-                <div class="book-price-n-btns">
-                    <div class="price-wrapper"><p class="book-price"></p></div>
-                    <div class="btns-container">
-                        <div>
-                            <a id="favorite">찜하기</a>
-                            <a id="cart">장바구니</a>
-                            <a>바로구매</a>
+                <div class="title-wrapper">
+                    <p class="book-title"></p>
+                </div>
+                <div class="top">
+                    <div class="image-wrapper"><img class="book-image" src=""></div>
+                    <div class="book-price-n-btns">
+                        <div class="price-wrapper"><p class="book-price"></p></div>
+                        <div class="btns-container">
+                            <div>
+                                <a id="favorite">찜하기</a>
+                                <a id="cart">장바구니</a>
+                                <a>바로구매</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="separator"></div>
-            <div class="bottom">
-                <div>
-                    <p class="medium-title">책 소개</p>
+                <div class="separator"></div>
+                <div class="bottom">
                     <div>
-                        <div class="small-title">제목</div><div class="info-content"></div>
-                    </div>
-                    <div>
-                        <div class="small-title">저자</div><div class="info-content"></div>
-                    </div>
-                    <div>
-                        <div class="small-title">출판사</div><div class="info-content"></div>
-                    </div>
-                    <div>
-                        <div class="small-title">설명</div><div class="info-content"></div>
+                        <p class="medium-title">책 소개</p>
+                        <div>
+                            <div class="small-title">제목</div><div class="info-content"></div>
+                        </div>
+                        <div>
+                            <div class="small-title">저자</div><div class="info-content"></div>
+                        </div>
+                        <div>
+                            <div class="small-title">출판사</div><div class="info-content"></div>
+                        </div>
+                        <div>
+                            <div class="small-title">설명</div><div class="info-content"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div>
+                    <button id="to-list-btn">목록으로</button>
+                </div>
             </div>
         </section>
         <footer>푸터</footer>
@@ -80,6 +83,7 @@
 
     const params = new URLSearchParams(window.location.search)
     const isbn = params.get("isbn");
+    const currentPage = params.get("page");
 
     document.addEventListener("DOMContentLoaded", async() => {
         try {
@@ -111,6 +115,11 @@
     })
     cartBtn.addEventListener("click", () => {
         cart.addCart(isbn);
+    })
+
+    const toListBtn = document.getElementById("to-list-btn");
+    toListBtn.addEventListener("click", () => {
+        location.href = `bookAll.html?page=${currentPage}`
     })
 </script>
 </html>
