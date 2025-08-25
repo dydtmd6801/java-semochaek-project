@@ -14,6 +14,7 @@ import com.project.repository.FavoriteRepository;
 import com.project.repository.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -63,4 +64,15 @@ public class FavoriteService {
 						.build())
 				.collect(Collectors.toList());
 	}
+	
+	@Transactional
+	public void deleteFavoriteBook(String email, String isbn) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new EntityNotFoundException());
+		Book book = bookRepository.findByIsbn(isbn)
+				.orElseThrow(() -> new EntityNotFoundException());
+		
+		favoriteRepository.deleteByUserAndBook(user, book);
+	}
+	
 }
