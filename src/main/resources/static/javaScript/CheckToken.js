@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const btnLogout = document.createElement("button");
         btnLogout.className = "logout-btn";
         btnLogout.textContent = "로그아웃";
+        btnLogout.addEventListener("click", () => {
+            localStorage.removeItem("token");
+            alert("로그아웃 되었습니다.");
+            location.reload(true);
+        })
         loginInfo.appendChild(userInfo);
         loginInfo.appendChild(btnLogout);
         loginWrapper.appendChild(loginInfo);
