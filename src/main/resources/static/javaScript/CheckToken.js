@@ -15,11 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         validator.validateToken(token);
         const parseToken = parser.parseJwt(token);
+        let userEmail = parseToken.sub.split("@");
+        const loginInfo = document.createElement("div");
+        loginInfo.className = "login-info";
         const userInfo = document.createElement("p");
-        userInfo.textContent = `${parseToken.sub} 님 환영합니다`;
-        const btnLogout = document.createElement("p");
+        userInfo.textContent = `${userEmail[0]} 님 환영합니다`;
+        userInfo.className = "user-info";
+        const btnLogout = document.createElement("button");
+        btnLogout.className = "logout-btn";
         btnLogout.textContent = "로그아웃";
-        loginWrapper.appendChild(userInfo);
-        loginWrapper.appendChild(btnLogout);
+        loginInfo.appendChild(userInfo);
+        loginInfo.appendChild(btnLogout);
+        loginWrapper.appendChild(loginInfo);
     }
 })
