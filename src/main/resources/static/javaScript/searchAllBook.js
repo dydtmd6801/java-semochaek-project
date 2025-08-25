@@ -1,4 +1,5 @@
 import cart from "./Cart.js";
+import favorite from "./Favorite.js";
 
 document.addEventListener("DOMContentLoaded", async() => {
     const bookList = document.getElementById("books");
@@ -56,6 +57,9 @@ document.addEventListener("DOMContentLoaded", async() => {
             const btnFavorite = document.createElement("a");
             btnFavorite.className = "btn-favorite";
             btnFavorite.textContent = "찜하기";
+            btnFavorite.addEventListener("click", () => {
+                favorite.addFavoriteBook(book.isbn);
+            })
 
             const btnCart = document.createElement("a");
             btnCart.className = "btn-cart";
