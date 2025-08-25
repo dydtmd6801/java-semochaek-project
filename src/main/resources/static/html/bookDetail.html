@@ -36,8 +36,8 @@
                     <div class="price-wrapper"><p class="book-price"></p></div>
                     <div class="btns-container">
                         <div>
-                            <a>찜하기</a>
-                            <a>장바구니</a>
+                            <a id="favorite">찜하기</a>
+                            <a id="cart">장바구니</a>
                             <a>바로구매</a>
                         </div>
                     </div>
@@ -66,7 +66,10 @@
         <footer>푸터</footer>
     </div>
 </body>
-<script>
+<script type="module">
+    import cart from "../javaScript/Cart.js";
+    import favorite from "../javaScript/Favorite.js";
+
     const bookTitle = document.getElementsByClassName("book-title")[0];
     const bookImage = document.getElementsByClassName("book-image")[0];
     const bookPrice = document.getElementsByClassName("book-price")[0];
@@ -99,6 +102,15 @@
         } catch (err) {
             console.log(err);
         }
+    })
+
+    const favoriteBtn = document.getElementById("favorite");
+    const cartBtn = document.getElementById("cart");
+    favoriteBtn.addEventListener("click", () => {
+        favorite.addFavoriteBook(isbn);
+    })
+    cartBtn.addEventListener("click", () => {
+        cart.addCart(isbn);
     })
 </script>
 </html>
