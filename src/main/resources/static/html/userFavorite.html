@@ -11,6 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../javaScript/Favorite.js" type="module"></script>
+    <script type="module">
+        import favorite from "../javaScript/Favorite.js";
+        const token = favorite.checkToken();
+        favorite.loadFavoriteList(token);
+    </script>
     <title>찜 목록</title>
 </head>
 <body>
