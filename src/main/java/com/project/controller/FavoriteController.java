@@ -40,4 +40,11 @@ public class FavoriteController {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		return ResponseEntity.ok(favoriteService.readFavoirteList(email));
 	}
+	
+	@GetMapping("/remove")
+	public ResponseEntity<?> removeFavoriteBook(@RequestParam("isbn") String isbn) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		favoriteService.deleteFavoriteBook(email, isbn);
+		return ResponseEntity.ok("delete success");
+	}
 }
