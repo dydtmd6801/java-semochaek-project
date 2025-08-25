@@ -27,6 +27,11 @@ section .bookMenu ul li {
     justify-content: center;
     align-items: center;
     border-radius: 50px 50px 0 0;
+    color: lightgrey;
+}
+section .bookMenu ul li:first-child {
+    font-weight: 500;
+    color: black;
 }
 section #books {
     display: flex;
