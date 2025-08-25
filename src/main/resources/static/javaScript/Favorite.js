@@ -81,14 +81,10 @@ function createFavoriteList(favorites) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function addFavoriteBook(isbn) {
     const token = checkToken();
-    loadFavoriteList(token);
-})
-
-function addFavoriteBook(isbn, token) {
     axios.get(`http://localhost:8080/favorite/add?isbn=${isbn}`, {
-        header: {
+        headers: {
             Authorization: `Bearer ${token}`,
             "Content-type": "application/json"
         }
@@ -106,4 +102,4 @@ function addFavoriteBook(isbn, token) {
     })
 }
 
-export default { addFavoriteBook };
+export default { addFavoriteBook, checkToken, loadFavoriteList };
