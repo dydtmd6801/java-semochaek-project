@@ -40,4 +40,34 @@ header .topMenu ul li {
 footer {
     background-color: #1E293B;
     height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-container {
+    height: 20vh;
+    width: 1280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-container > div {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-container > div:first-child > p {
+    font-size: 0.9em;
+    color: #e5e7eb;
+}
+
+.footer-container > div > p, .github {
+    font-size: 0.9em;
+    color: #9ca3af;
+}
+
+.footer-container > div:last-child > p {
+    line-height: 20px;
 }
