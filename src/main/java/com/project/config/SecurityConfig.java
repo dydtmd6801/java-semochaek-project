@@ -35,7 +35,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/login", "/register", "/send-code", "/verify-code", "/findEmail", "/resetPassword", "/books/**").permitAll()
 					.requestMatchers("/api/admin/**").hasRole("ADMIN")
-					.requestMatchers("/addCart", "/searchCart", "/deleteCart","/api/payments/**","/order/**","/getUserInfo").hasRole("USER")
+					.requestMatchers("/addCart", "/searchCart", "/deleteCart","/api/payments/**","/order/**","/getUserInfo", "/favorite/**").hasRole("USER")
 					.anyRequest().authenticated()
 				)
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
